@@ -37,7 +37,7 @@ export default function Hero() {
 
             {/* Bio paragraph */}
             <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Exploring frontend development, thoughtful UI design, and interactive web experiences—one project at a time.
+              Hi, I'm <strong className="text-neutral-900 dark:text-white font-semibold">Geraldene Cabiles</strong>, an Information Technology student exploring the world of frontend development, creative UI design, and interactive web experiences. I'm passionate about learning, turning ideas into digital experiences, and growing one project at a time.
             </p>
 
             {/* CTAs */}

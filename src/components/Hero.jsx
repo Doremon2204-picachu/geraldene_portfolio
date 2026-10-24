@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Download, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
   // Default high-resolution designer portrait fallback
@@ -78,22 +78,6 @@ export default function Hero() {
                 <Download className="w-4 h-4" />
                 <span>Resume (CV)</span>
               </a>
-            </div>
-
-            {/* Highlights pill tags */}
-            <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs text-neutral-500 dark:text-neutral-400">
-              <span className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-200/60 dark:border-neutral-800/60">
-                <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500" />
-                Figma Design Systems
-              </span>
-              <span className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-200/60 dark:border-neutral-800/60">
-                <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500" />
-                React & Tailwind CSS
-              </span>
-              <span className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-200/60 dark:border-neutral-800/60">
-                <CheckCircle2 className="w-3.5 h-3.5 text-indigo-500" />
-                WCAG 2.1 Accessibility
-              </span>
             </div>
           </motion.div>
 

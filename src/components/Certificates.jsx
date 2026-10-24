@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { certificates } from '../data/certificates';
-import PdfViewer from './PdfViewer';
-import { Award, ExternalLink, Check, Copy, X, FileText } from 'lucide-react';
+import { Award, ExternalLink, Check, Copy, X, FileText, Image as ImageIcon } from 'lucide-react';
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState(null);
@@ -43,12 +42,13 @@ export default function Certificates() {
               onClick={() => setSelectedCert(cert)}
               className="group cursor-pointer rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/90 p-5 sm:p-7 shadow-md hover:shadow-2xl hover:border-indigo-400 dark:hover:border-indigo-500 transition-all duration-300 flex flex-col justify-between"
             >
-              {/* Actual Certificate Document Visual Paper */}
-              <div className="relative w-full">
-                <PdfViewer
-                  url={cert.pdfUrl}
-                  scale={2}
-                  alt={`${cert.title} Certificate`}
+              {/* Actual Official Certificate Visual Image */}
+              <div className="relative w-full aspect-[1.414/1] rounded-2xl overflow-hidden bg-white border border-neutral-200/90 dark:border-neutral-800 shadow-inner flex items-center justify-center">
+                <img
+                  src={cert.imageUrl}
+                  alt={`${cert.title} Official Certificate`}
+                  className="w-full h-full object-contain select-none transition-transform duration-300 group-hover:scale-[1.01]"
+                  loading="lazy"
                 />
               </div>
 
@@ -134,7 +134,7 @@ export default function Certificates() {
                     <h3 className="font-extrabold text-base sm:text-lg text-neutral-900 dark:text-white leading-tight">
                       {selectedCert.title}
                     </h3>
-                    <p className="text-xs text-neutral-500">Official Signed Cisco Credential</p>
+                    <p className="text-xs text-neutral-500">Official Verified Cisco Credential</p>
                   </div>
                 </div>
                 <button
@@ -147,11 +147,11 @@ export default function Certificates() {
               </div>
 
               {/* High-Resolution Certificate Document */}
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-neutral-200 dark:border-neutral-800">
-                <PdfViewer
-                  url={selectedCert.pdfUrl}
-                  scale={2.5}
-                  alt={`${selectedCert.title} Official Certificate`}
+              <div className="relative w-full aspect-[1.414/1] rounded-2xl overflow-hidden shadow-xl border border-neutral-200 dark:border-neutral-800 bg-white">
+                <img
+                  src={selectedCert.imageUrl}
+                  alt={`${selectedCert.title} Official Certificate Full View`}
+                  className="w-full h-full object-contain select-none"
                 />
               </div>
 
@@ -176,16 +176,29 @@ export default function Certificates() {
                   </button>
                 </div>
 
-                <a
-                  href={selectedCert.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 text-xs font-bold hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all shadow-md"
-                >
-                  <FileText className="w-4 h-4" />
-                  <span>Open Official Signed PDF</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={selectedCert.imageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-xs font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                    <span>View PNG Image</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+
+                  <a
+                    href={selectedCert.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 text-xs font-bold hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all shadow-md"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Open Official Signed PDF</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
               </div>
 
             </motion.div>

@@ -36,6 +36,7 @@ export default function Footer() {
             <a href="#projects" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Projects</a>
             <a href="#skills" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Skills</a>
             <a href="#certificates" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Certificates</a>
+            <a href="#education" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Education</a>
             <a href="#contact" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Contact</a>
           </div>
 

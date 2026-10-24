@@ -18,10 +18,6 @@ export default function Certificates() {
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
-            <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Official Credentials</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
             Certifications & Technical Training.
           </h2>

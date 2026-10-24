@@ -29,17 +29,15 @@ export default function Hero() {
           >
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.12]">
-              Designing intuitive interfaces.{' '}
+              Curiosity in code.{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-                Crafting clean React code.
+                Creativity in motion.
               </span>
             </h1>
 
             {/* Bio paragraph */}
             <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Hi, I'm <strong className="text-neutral-900 dark:text-white font-semibold">Geraldene</strong> — a hybrid 
-              UI/UX Designer and Frontend Web Developer. I bridge the gap between user empathy, design systems in Figma, 
-              and performant, accessible web applications in React.
+              Exploring frontend development, thoughtful UI design, and interactive web experiences—one project at a time.
             </p>
 
             {/* CTAs */}

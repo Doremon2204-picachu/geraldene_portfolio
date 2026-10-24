@@ -5,20 +5,20 @@ import { Briefcase, GraduationCap, Calendar, MapPin, Sparkles, CheckCircle2 } fr
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 sm:py-32 bg-neutral-100/50 dark:bg-neutral-900/30 border-y border-neutral-200/80 dark:border-neutral-800/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="education" className="py-24 sm:py-32 bg-neutral-100/50 dark:bg-neutral-900/30 border-y border-neutral-200/80 dark:border-neutral-800/80">
+      <div id="experience" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200/50 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 text-xs font-semibold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Career Journey</span>
+            <span>Academic & Career Journey</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
-            Experience & Education.
+            Education & Experience.
           </h2>
           <p className="text-base text-neutral-600 dark:text-neutral-400">
-            A timeline of my professional roles, design leadership, and continuous learning.
+            My academic foundation in Information Technology, continuous learning, and development projects.
           </p>
         </div>
 

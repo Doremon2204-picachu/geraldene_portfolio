@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Sparkles, ArrowRight } from 'lucide-react';
+import { Download, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
-  // Default high-resolution designer portrait fallback
-  const defaultPhoto = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80';
-  
-  // Use image saved in localStorage (from prior selection) or /profile.jpg, otherwise fallback to defaultPhoto
-  const [profileImage] = useState(() => {
-    return (typeof window !== 'undefined' && localStorage.getItem('geraldene-profile-img')) || '/profile.jpg';
-  });
+  // Clear any legacy localStorage photo override on mount to ensure Geraldene's real photo loads
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('geraldene-profile-img');
+      } catch (_) {}
+    }
+  }, []);
+
+  const profileImage = '/profile.jpg';
 
   return (
     <section id="about" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
@@ -61,7 +64,7 @@ export default function Hero() {
                 href="/resume.pdf"
                 onClick={(e) => {
                   e.preventDefault();
-                  alert("Geraldene's resume download initiated. You can replace this link with your actual resume.pdf in public/");
+                  alert("Geraldene's resume download initiated. You can place your actual resume.pdf in public/");
                 }}
                 className="inline-flex items-center gap-1.5 px-4 py-3.5 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white text-sm font-medium transition-colors"
                 title="Download CV"
@@ -103,13 +106,8 @@ export default function Hero() {
                 <div className="relative aspect-[4/5] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">
                   <img
                     src={profileImage}
-                    alt="Geraldene — UI/UX Designer & Web Developer"
-                    onError={(e) => {
-                      if (e.currentTarget.src !== defaultPhoto) {
-                        e.currentTarget.src = defaultPhoto;
-                      }
-                    }}
-                    className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                    alt="Geraldene Cabiles — UI/UX Designer & Web Developer"
+                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   />
 
                   {/* Gentle gradient overlay for high contrast text at bottom */}
@@ -118,10 +116,10 @@ export default function Hero() {
                   {/* Clean Bottom Nameplate over picture */}
                   <div className="absolute bottom-3 left-3 right-3 z-10 p-4 rounded-xl bg-white/90 dark:bg-neutral-950/85 backdrop-blur-md border border-white/40 dark:border-neutral-800 shadow-xl">
                     <h3 className="font-extrabold text-base text-neutral-900 dark:text-white tracking-tight">
-                      Geraldene
+                      Geraldene Cabiles
                     </h3>
                     <p className="text-xs text-neutral-600 dark:text-neutral-400 font-medium mt-0.5">
-                      UI/UX Designer & Web Developer
+                      BSIT · UI/UX Designer & Web Developer
                     </p>
                   </div>
 

@@ -11,13 +11,6 @@ export default function Hero() {
     return (typeof window !== 'undefined' && localStorage.getItem('geraldene-profile-img')) || '/profile.jpg';
   });
 
-  const stats = [
-    { value: '4+', label: 'Years Experience' },
-    { value: '25+', label: 'Shipped Projects' },
-    { value: '100%', label: 'Commitment to Quality' },
-    { value: '99%', label: 'Avg Lighthouse Score' },
-  ];
-
   return (
     <section id="about" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
       {/* Background ambient decorative glows */}
@@ -141,25 +134,6 @@ export default function Hero() {
           </motion.div>
 
         </div>
-
-        {/* Stats Row */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 sm:mt-24 pt-10 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"
-        >
-          {stats.map((stat, idx) => (
-            <div key={idx} className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-medium">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
 
       </div>
     </section>

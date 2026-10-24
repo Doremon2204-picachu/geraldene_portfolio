@@ -5,8 +5,6 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Certificates from './components/Certificates';
-import Process from './components/Process';
-import Experience from './components/Experience';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -21,7 +19,6 @@ export default function App() {
           <Projects />
           <Skills />
           <Certificates />
-          <Experience />
           <Testimonials />
           <Contact />
         </main>

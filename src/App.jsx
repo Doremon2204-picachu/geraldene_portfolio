@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
+import Certificates from './components/Certificates';
 import Process from './components/Process';
 import Experience from './components/Experience';
 import Testimonials from './components/Testimonials';
@@ -19,7 +20,7 @@ export default function App() {
           <Hero />
           <Projects />
           <Skills />
-          <Process />
+          <Certificates />
           <Experience />
           <Testimonials />
           <Contact />

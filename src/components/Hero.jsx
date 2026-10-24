@@ -108,26 +108,26 @@ export default function Hero() {
             <div className="relative group w-full max-w-[380px] sm:max-w-[410px]">
               
               {/* Ambient Glow behind the card */}
-              <div className="absolute -inset-1.5 bg-gradient-to-tr from-indigo-500/25 via-purple-500/25 to-pink-500/25 rounded-[32px] blur-xl opacity-70 group-hover:opacity-95 transition-opacity duration-500 -z-10" />
+              <div className="absolute -inset-2 bg-gradient-to-tr from-indigo-500/30 via-purple-500/30 to-pink-500/30 rounded-[36px] blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 -z-20" />
 
-              {/* Cyber Circuit Tech Accent attached to the frame */}
+              {/* Cyber Circuit Tech Accent - Sent to back and moved outward */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute -top-10 -right-8 sm:-top-12 sm:-right-10 w-44 sm:w-56 pointer-events-none z-20 select-none"
+                className="absolute -top-16 -right-14 sm:-top-20 sm:-right-20 w-56 sm:w-68 pointer-events-none -z-10 select-none"
               >
                 {/* Glowing node aura */}
-                <div className="absolute top-2 right-2 w-20 h-20 bg-cyan-400/25 rounded-full blur-xl pointer-events-none" />
+                <div className="absolute top-2 right-2 w-28 h-28 bg-cyan-400/30 rounded-full blur-2xl pointer-events-none" />
                 <img 
                   src="/circuit-tech.png" 
                   alt="Cyber Tech Circuit Accent" 
-                  className="relative w-full h-auto drop-shadow-md dark:drop-shadow-[0_0_18px_rgba(34,211,238,0.7)] dark:brightness-125 transition-transform duration-500 group-hover:scale-105"
+                  className="relative w-full h-auto drop-shadow-lg dark:drop-shadow-[0_0_22px_rgba(34,211,238,0.75)] dark:brightness-125 transition-transform duration-500 group-hover:scale-105"
                 />
               </motion.div>
 
-              {/* Main Card Container */}
-              <div className="relative rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/90 p-3 sm:p-3.5 shadow-2xl backdrop-blur-md overflow-hidden">
+              {/* Main Card Container with increased shadow */}
+              <div className="relative z-10 rounded-3xl border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900/95 p-3 sm:p-3.5 shadow-[0_22px_55px_rgba(0,0,0,0.16),0_12px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_30px_75px_-15px_rgba(0,0,0,0.85),0_0_35px_rgba(0,0,0,0.5)] backdrop-blur-md overflow-hidden">
                 
                 {/* Picture Frame */}
                 <div className="relative aspect-[4/5] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">

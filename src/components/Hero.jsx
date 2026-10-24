@@ -1,10 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, Sparkles, Code, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Download, Sparkles, CheckCircle2, ArrowRight, Camera, Code2 } from 'lucide-react';
 import { FigmaIcon } from './Icons';
 
 export default function Hero() {
-  const [activeTab, setActiveTab] = useState('design');
+  const fileInputRef = useRef(null);
+
+  // Default high-resolution designer portrait
+  const defaultPhoto = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80';
+  
+  // Try local /profile.jpg first, fall back to defaultPhoto if not yet uploaded
+  const [profileImage, setProfileImage] = useState(() => {
+    return localStorage.getItem('geraldene-profile-img') || '/profile.jpg';
+  });
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (uploadEvent) => {
+        const result = uploadEvent.target?.result;
+        if (typeof result === 'string') {
+          setProfileImage(result);
+          try {
+            localStorage.setItem('geraldene-profile-img', result);
+          } catch (err) {
+            console.warn('Image too large for localStorage, showing in memory only');
+          }
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const stats = [
     { value: '4+', label: 'Years Experience' },
@@ -20,7 +47,7 @@ export default function Hero() {
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
           
           {/* Left Column: Headline & Value Proposition */}
           <motion.div 
@@ -101,137 +128,119 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Right Column: Interactive Hybrid Designer/Developer Showcase Card */}
+          {/* Right Column: Modified Picture Box Layout */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
+            className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="relative mx-auto max-w-md rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/90 shadow-xl overflow-hidden backdrop-blur-md">
+            {/* Outer Picture Card with Glow */}
+            <div className="relative group w-full max-w-[380px] sm:max-w-[410px]">
               
-              {/* Window Title Bar & Tabs */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-100/70 dark:bg-neutral-900/70">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-rose-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400/80" />
-                </div>
+              {/* Ambient Glow behind the card */}
+              <div className="absolute -inset-1.5 bg-gradient-to-tr from-indigo-500/25 via-purple-500/25 to-pink-500/25 rounded-[32px] blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+
+              {/* Main Card Container */}
+              <div className="relative rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/90 p-3 sm:p-3.5 shadow-2xl backdrop-blur-md overflow-hidden">
                 
-                {/* Switcher: Design view vs Code view */}
-                <div className="flex p-0.5 rounded-lg bg-neutral-200/70 dark:bg-neutral-800 text-xs font-medium">
-                  <button
-                    onClick={() => setActiveTab('design')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all cursor-pointer ${
-                      activeTab === 'design'
-                        ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-2xs font-semibold'
-                        : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <Layers className="w-3.5 h-3.5 text-purple-500" />
-                    <span>Figma Specs</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('code')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded-md transition-all cursor-pointer ${
-                      activeTab === 'code'
-                        ? 'bg-white dark:bg-neutral-700 text-neutral-900 dark:text-white shadow-2xs font-semibold'
-                        : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'
-                    }`}
-                  >
-                    <Code className="w-3.5 h-3.5 text-indigo-500" />
-                    <span>React JSX</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-6">
-                {activeTab === 'design' ? (
-                  <div className="space-y-4">
-                    {/* Design Specs simulation */}
-                    <div className="flex items-center justify-between text-xs font-mono text-neutral-400 dark:text-neutral-500 pb-2 border-b border-neutral-100 dark:border-neutral-800">
-                      <span>FRAME: HeroCard.component</span>
-                      <span>AUTO-LAYOUT: flex-col</span>
-                    </div>
-
-                    {/* Visual Card Component Preview */}
-                    <div className="p-5 rounded-xl border border-dashed border-indigo-300 dark:border-indigo-800/80 bg-indigo-50/30 dark:bg-indigo-950/20 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs uppercase font-bold tracking-wider text-indigo-600 dark:text-indigo-400 font-mono">
-                          Design System Token
-                        </span>
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300">
-                          rad: 16px
-                        </span>
-                      </div>
-                      <h4 className="font-bold text-neutral-900 dark:text-white text-base">
-                        Human-Centered Interface
-                      </h4>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                        Precision typography, optical balance, and frictionless user flows designed for clarity.
-                      </p>
-                      
-                      <div className="pt-2 flex items-center gap-2">
-                        <div className="h-4 w-4 rounded-full bg-indigo-500" title="#6366f1 Primary" />
-                        <div className="h-4 w-4 rounded-full bg-purple-500" title="#a855f7 Secondary" />
-                        <div className="h-4 w-4 rounded-full bg-pink-500" title="#ec4899 Accent" />
-                        <span className="text-[11px] font-mono text-neutral-400 pl-2">tokens.color.palette</span>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-3 text-xs">
-                      <div className="p-3 rounded-lg bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200/50 dark:border-neutral-700/50">
-                        <div className="text-neutral-400 dark:text-neutral-500 text-[11px]">Typography</div>
-                        <div className="font-semibold text-neutral-800 dark:text-neutral-200 mt-0.5">Plus Jakarta Sans</div>
-                      </div>
-                      <div className="p-3 rounded-lg bg-neutral-100 dark:bg-neutral-800/60 border border-neutral-200/50 dark:border-neutral-700/50">
-                        <div className="text-neutral-400 dark:text-neutral-500 text-[11px]">Grid System</div>
-                        <div className="font-semibold text-neutral-800 dark:text-neutral-200 mt-0.5">8pt Base Rhythm</div>
-                      </div>
-                    </div>
+                {/* Top Subtle Mac-Style Window Dots / Controls */}
+                <div className="flex items-center justify-between px-3 py-2 pb-3 border-b border-neutral-100 dark:border-neutral-800/80 mb-2.5">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
                   </div>
-                ) : (
-                  <div className="space-y-3 font-mono text-xs">
-                    <div className="flex items-center justify-between text-[11px] text-neutral-400 pb-2 border-b border-neutral-100 dark:border-neutral-800">
-                      <span>src/components/HeroCard.jsx</span>
-                      <span>ES2026</span>
-                    </div>
-                    <pre className="p-4 rounded-xl bg-neutral-950 text-neutral-300 text-[11px] leading-relaxed overflow-x-auto selection:bg-neutral-800">
-                      <code>
-                        <span className="text-purple-400">export default</span>{' '}
-                        <span className="text-blue-400">function</span>{' '}
-                        <span className="text-amber-300">GeraldenePortfolio</span>() &#123;{'\n'}
-                        {'  '}<span className="text-purple-400">const</span> [state, setState] = <span className="text-cyan-400">useState</span>(&#123;{'\n'}
-                        {'    '}design: <span className="text-emerald-400">'Figma Systems'</span>,{'\n'}
-                        {'    '}code: <span className="text-emerald-400">'React + Tailwind'</span>,{'\n'}
-                        {'    '}passion: <span className="text-emerald-400">'Flawless UX'</span>{'\n'}
-                        {'  '}&#125;);{'\n\n'}
-                        {'  '}<span className="text-purple-400">return</span> ({'\n'}
-                        {'    '}&lt;<span className="text-pink-400">Experience</span>{' '}
-                        <span className="text-amber-300">impact</span>=&#123;<span className="text-cyan-400">true</span>&#125; /&gt;{'\n'}
-                        {'  '});{'\n'}
-                        &#125;
-                      </code>
-                    </pre>
-                    <div className="flex items-center justify-between pt-1 text-[11px] text-neutral-500">
-                      <span className="flex items-center gap-1.5">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        TypeScript & JSX Validated
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-400 dark:text-neutral-500">
+                    <Sparkles className="w-3 h-3 text-indigo-500" />
+                    <span>geraldene.portrait</span>
+                  </div>
+                </div>
+
+                {/* Picture Frame */}
+                <div className="relative aspect-[4/5] sm:h-[460px] w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+                  <img
+                    src={profileImage}
+                    alt="Geraldene — UI/UX Designer & Web Developer"
+                    onError={(e) => {
+                      // Fallback to beautiful default photo if custom file isn't found
+                      if (e.currentTarget.src !== defaultPhoto) {
+                        e.currentTarget.src = defaultPhoto;
+                      }
+                    }}
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                  />
+
+                  {/* Gentle gradient overlay for high contrast text at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-neutral-950/20 to-transparent pointer-events-none" />
+
+                  {/* Top-Right Floating Pill: Available Badge */}
+                  <div className="absolute top-3.5 right-3.5 z-10">
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900/80 dark:bg-neutral-900/90 text-white backdrop-blur-md border border-white/20 text-[11px] font-semibold shadow-lg">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
                       </span>
-                      <span>0 errors</span>
+                      <span>Online / Active</span>
                     </div>
                   </div>
-                )}
-              </div>
 
-              {/* Card Footer Status */}
-              <div className="px-6 py-3 border-t border-neutral-100 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50 flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400">
-                <div className="flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Dual Mindset: Aesthetic & Algorithmic</span>
+                  {/* Change Photo Quick Action Button */}
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    aria-label="Upload custom picture"
+                    title="Click to preview your own photo"
+                    className="absolute top-3.5 left-3.5 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/80 dark:bg-neutral-900/80 text-neutral-800 dark:text-neutral-200 backdrop-blur-md border border-white/40 dark:border-neutral-700/60 text-[10px] font-medium opacity-90 hover:opacity-100 hover:scale-105 transition-all cursor-pointer shadow-md"
+                  >
+                    <Camera className="w-3 h-3 text-indigo-500" />
+                    <span>Change Photo</span>
+                  </button>
+
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+
+                  {/* Bottom Information Card over picture */}
+                  <div className="absolute bottom-3 left-3 right-3 z-10 p-4 rounded-xl bg-white/90 dark:bg-neutral-950/85 backdrop-blur-md border border-white/40 dark:border-neutral-800 shadow-xl">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-extrabold text-base text-neutral-900 dark:text-white tracking-tight">
+                          Geraldene
+                        </h3>
+                        <p className="text-xs text-neutral-600 dark:text-neutral-400 font-medium">
+                          UI/UX Designer & Web Developer
+                        </p>
+                      </div>
+                      
+                      {/* Dual Craft Badges */}
+                      <div className="flex items-center gap-1.5">
+                        <span className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-600 dark:text-purple-400" title="Figma UI/UX Design">
+                          <FigmaIcon className="w-3.5 h-3.5" />
+                        </span>
+                        <span className="p-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400" title="React.js Web Development">
+                          <Code2 className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-                <span className="font-mono text-[11px]">v2.4.0</span>
+
+                {/* Card Sub-Footer info */}
+                <div className="mt-2.5 px-2 flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
+                  <span className="flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                    Portfolio Portrait
+                  </span>
+                  <span className="font-mono text-[10px] text-neutral-400">
+                    Replace via public/profile.jpg
+                  </span>
+                </div>
+
               </div>
             </div>
           </motion.div>

@@ -97,7 +97,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Right Column: Clean Minimalist Picture Frame */}
+          {/* Right Column: Clean Minimalist Picture Frame with Cyber Circuit Accent */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -109,6 +109,22 @@ export default function Hero() {
               
               {/* Ambient Glow behind the card */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-indigo-500/25 via-purple-500/25 to-pink-500/25 rounded-[32px] blur-xl opacity-70 group-hover:opacity-95 transition-opacity duration-500 -z-10" />
+
+              {/* Cyber Circuit Tech Accent attached to the frame */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="absolute -top-10 -right-8 sm:-top-12 sm:-right-10 w-44 sm:w-56 pointer-events-none z-20 select-none"
+              >
+                {/* Glowing node aura */}
+                <div className="absolute top-2 right-2 w-20 h-20 bg-cyan-400/25 rounded-full blur-xl pointer-events-none" />
+                <img 
+                  src="/circuit-tech.png" 
+                  alt="Cyber Tech Circuit Accent" 
+                  className="relative w-full h-auto drop-shadow-md dark:drop-shadow-[0_0_18px_rgba(34,211,238,0.7)] dark:brightness-125 transition-transform duration-500 group-hover:scale-105"
+                />
+              </motion.div>
 
               {/* Main Card Container */}
               <div className="relative rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/90 p-3 sm:p-3.5 shadow-2xl backdrop-blur-md overflow-hidden">

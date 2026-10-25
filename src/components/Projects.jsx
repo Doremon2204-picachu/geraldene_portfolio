@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { projects } from '../data/projects';
-import { Sparkles, ArrowUpRight, FolderGit2 } from 'lucide-react';
+import { ArrowUpRight, FolderGit2, ExternalLink } from 'lucide-react';
+import { GithubIcon } from './Icons';
 
 export default function Projects() {
   return (
@@ -30,49 +31,85 @@ export default function Projects() {
               className="group rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/80 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-4">
-                {/* Visual Placeholder Box for upcoming project design/screenshot */}
-                <div className={`relative aspect-video w-full rounded-2xl bg-gradient-to-br ${project.gradient} border border-neutral-200/60 dark:border-neutral-800/60 flex items-center justify-center overflow-hidden group-hover:scale-[1.02] transition-transform duration-300`}>
-                  <div className="flex flex-col items-center gap-2 text-neutral-400 dark:text-neutral-500">
-                    <FolderGit2 className="w-8 h-8 text-neutral-400 dark:text-neutral-500 opacity-60" />
-                    <span className="text-xs font-mono font-medium">Project Preview</span>
-                  </div>
-                </div>
+                {/* Visual Image / Screenshot or Placeholder Box (Clickable) */}
+                <a
+                  href={project.githubUrl || project.liveUrl || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block relative aspect-video w-full rounded-2xl overflow-hidden group-hover:scale-[1.02] transition-transform duration-300 border border-neutral-200/60 dark:border-neutral-800/60"
+                >
+                  {project.image ? (
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className={`w-full h-full bg-gradient-to-br ${project.gradient} flex flex-col items-center justify-center`}>
+                      <FolderGit2 className="w-8 h-8 text-neutral-400 dark:text-neutral-500 opacity-60" />
+                      <span className="text-xs font-mono font-medium text-neutral-400 dark:text-neutral-500 mt-2">Project Preview</span>
+                    </div>
+                  )}
+                </a>
 
                 {/* Title & Description */}
                 <div className="space-y-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {project.title.split('—')[0].trim()}
-                  </h3>
+                  <a
+                    href={project.githubUrl || project.liveUrl || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                      {project.title.split('—')[0].trim()}
+                    </h3>
+                  </a>
                   <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3 leading-relaxed">
                     {project.description}
                   </p>
                 </div>
               </div>
 
-              {/* Tags & Action */}
-              <div className="pt-5 mt-5 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between">
-                <div className="flex flex-wrap gap-1.5">
+              {/* Tags & Action Links */}
+              <div className="pt-5 mt-5 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-1.5 flex-1 min-w-0">
                   {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 truncate"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1.5 rounded-full text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-                    title="View Project"
-                  >
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                )}
+                {/* Action Buttons: GitHub & Live Demo */}
+                <div className="flex items-center gap-2 shrink-0">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                      title="View GitHub Repository"
+                    >
+                      <GithubIcon className="w-3.5 h-3.5" />
+                      <span>Code</span>
+                    </a>
+                  )}
+
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                      title="View Live Demo"
+                    >
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}

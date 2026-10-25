@@ -15,7 +15,7 @@ export default function Hero() {
   const profileImage = '/profile.jpg';
 
   return (
-    <section id="about" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
+    <section id="home" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
       {/* Background ambient decorative glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -40,7 +40,7 @@ export default function Hero() {
 
             {/* Bio paragraph */}
             <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Hi, I'm <strong className="text-neutral-900 dark:text-white font-semibold">Geraldene Cabiles</strong>, an Information Technology student exploring the world of frontend development, creative UI design, and interactive web experiences. I'm passionate about learning, turning ideas into digital experiences, and growing one project at a time.
+              Hi, I'm <strong className="text-neutral-900 dark:text-white font-semibold">Geraldene Cabiles</strong>, a fourth-year Information Technology student from Digos City exploring frontend development, creative UI design, and interactive web experiences.
             </p>
 
             {/* CTAs */}
@@ -107,7 +107,7 @@ export default function Hero() {
                   <img
                     src={profileImage}
                     alt="Geraldene Cabiles — UI/UX Designer & Web Developer"
-                    className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                   />
 
                   {/* Gentle gradient overlay for high contrast text at bottom */}

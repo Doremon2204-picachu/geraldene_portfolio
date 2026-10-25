@@ -21,12 +21,12 @@ export const skillCategories = [
     icon: 'Code2',
     accent: 'cyan',
     skills: [
-      { name: 'React.js', level: 92, description: 'Hooks, custom hooks, context, state management, component architecture' },
       { name: 'JavaScript (ES6+)', level: 90, description: 'Modern syntax, async/await, DOM APIs, functional patterns' },
-      { name: 'Tailwind CSS', level: 95, description: 'Custom configurations, responsive utilities, dark mode styling' },
-      { name: 'Framer Motion', level: 88, description: 'Layout animations, gesture transitions, scroll-linked choreography' },
-      { name: 'HTML5 & Semantic Markup', level: 98, description: 'Accessible structure, SEO best practices, modern web standards' },
-      { name: 'Responsive & Adaptive Layouts', level: 96, description: 'Fluid typography, container queries, mobile-first design' }
+      { name: 'React.js', level: 92, description: 'Hooks, custom hooks, context, state management, component architecture' },
+      { name: 'TypeScript', level: 85, description: 'Type-safe interfaces, generics, modern tooling' },
+      { name: 'Node.js', level: 82, description: 'Backend runtime, APIs, server-side development' },
+      { name: 'GSAP & Framer Motion', level: 88, description: 'Timeline animations, scroll-triggered effects, micro-interactions' },
+      { name: 'Tailwind CSS', level: 95, description: 'Responsive design, custom theme config, dark mode styling' }
     ]
   },
   {

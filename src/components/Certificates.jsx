@@ -53,50 +53,25 @@ export default function Certificates() {
               </div>
 
               {/* Card Meta & Actions Below Certificate */}
-              <div className="pt-5 mt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-1.5 text-xs text-neutral-500">
-                    <Award className="w-4 h-4 text-indigo-500 shrink-0" />
-                    <span className="font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-1">
-                      {cert.title}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                    Completed: <span className="font-medium text-neutral-700 dark:text-neutral-300">{cert.date}</span> · {cert.issuer}
-                  </div>
+              <div className="pt-4 mt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-1.5 text-sm">
+                  <Award className="w-4 h-4 text-indigo-500 shrink-0" />
+                  <span className="font-semibold text-neutral-900 dark:text-neutral-100 line-clamp-1">
+                    {cert.title}
+                  </span>
                 </div>
 
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    onClick={(e) => copyCertId(e, cert.certId)}
-                    className="p-2 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors flex items-center gap-1 text-xs"
-                    title="Copy Certificate ID"
-                  >
-                    {copiedId === cert.certId ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        <span className="text-[11px] text-emerald-600 font-medium">Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span className="text-[11px]">Copy ID</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href={cert.pdfUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 text-xs font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-all shadow-xs"
-                  >
-                    <FileText className="w-3.5 h-3.5" />
-                    <span>Official PDF</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
+                <a
+                  href={cert.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-neutral-900 text-white text-xs font-semibold hover:bg-neutral-800 transition-all shadow-xs shrink-0"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Official PDF</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
 
             </motion.div>

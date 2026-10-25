@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -81,21 +79,8 @@ export default function Navbar() {
               ))}
             </nav>
 
-            {/* Actions: Theme Toggle & Contact Button */}
+            {/* Actions: Contact Button */}
             <div className="flex items-center gap-2.5 sm:gap-3">
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-                className="p-2 sm:p-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-900 hover:text-neutral-950 dark:hover:text-white transition-all cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 transition-transform duration-300 rotate-0 hover:rotate-45" />
-                ) : (
-                  <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 transition-transform duration-300 -rotate-12 hover:rotate-0" />
-                )}
-              </button>
-
               {/* Let's Talk CTA */}
               <a
                 href="#contact"

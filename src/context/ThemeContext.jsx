@@ -1,42 +1,22 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 const ThemeContext = createContext({
-  theme: 'dark',
+  theme: 'light',
   toggleTheme: () => {},
 });
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    // Check localStorage first
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('geraldene-portfolio-theme');
-      if (savedTheme) {
-        return savedTheme;
-      }
-      // Check system preference (default to dark for sleek designer look, or check OS)
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
-      }
-    }
-    return 'dark'; // default to elegant dark mode
-  });
-
   useEffect(() => {
+    // Ensure dark class is completely removed and light mode is enforced
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('geraldene-portfolio-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
+    root.classList.remove('dark');
+    try {
+      localStorage.removeItem('geraldene-portfolio-theme');
+    } catch (_) {}
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme: 'light', toggleTheme: () => {} }}>
       {children}
     </ThemeContext.Provider>
   );

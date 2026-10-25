@@ -1,15 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
 
 export default function Hero() {
-  // Clear any legacy localStorage photo override on mount to ensure Geraldene's real photo loads
+  const cardRef = useRef(null);
+  const circuitRef = useRef(null);
+  const circuitGlowRef = useRef(null);
+  const ambientGlowRef = useRef(null);
+
   useEffect(() => {
+    // Clear legacy localStorage photo override on mount
     if (typeof window !== 'undefined') {
       try {
         localStorage.removeItem('geraldene-profile-img');
       } catch (_) {}
     }
+
+    if (!cardRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Organic floating animation for Profile Card
+      gsap.to(cardRef.current, {
+        y: -14,
+        rotationZ: 0.8,
+        duration: 3.2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // 2. Cyber Circuit accent counter-float with depth parallax
+      if (circuitRef.current) {
+        gsap.to(circuitRef.current, {
+          y: -20,
+          x: 4,
+          rotation: 3,
+          duration: 2.7,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+
+      // 3. Cyber Circuit glowing node pulsing
+      if (circuitGlowRef.current) {
+        gsap.to(circuitGlowRef.current, {
+          scale: 1.35,
+          opacity: 0.75,
+          duration: 1.9,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut'
+        });
+      }
+
+      // 4. Ambient background glow pulse
+      if (ambientGlowRef.current) {
+        gsap.to(ambientGlowRef.current, {
+          scale: 1.15,
+          opacity: 0.85,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+      }
+    });
+
+    return () => ctx.revert();
   }, []);
 
   const profileImage = '/profile.jpg';
@@ -17,7 +76,10 @@ export default function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 overflow-hidden">
       {/* Background ambient decorative glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div 
+        ref={ambientGlowRef}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none -z-10" 
+      />
       <div className="absolute top-1/3 -right-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -75,7 +137,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Right Column: Clean Minimalist Picture Frame with Cyber Circuit Accent */}
+          {/* Right Column: Clean Minimalist Picture Frame with GSAP Floating Cyber Accent */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -88,10 +150,16 @@ export default function Hero() {
               {/* Ambient Glow behind the card */}
               <div className="absolute -inset-2 bg-gradient-to-tr from-indigo-500/30 via-purple-500/30 to-pink-500/30 rounded-[36px] blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 -z-20" />
 
-              {/* Cyber Circuit Tech Accent - Steady and shifted to the right to fit the frame */}
-              <div className="absolute -top-6 -right-10 sm:-top-8 sm:-right-14 w-44 sm:w-52 pointer-events-none z-20 select-none">
+              {/* Cyber Circuit Tech Accent - Animated with GSAP Floating & Pulsing */}
+              <div 
+                ref={circuitRef}
+                className="absolute -top-6 -right-10 sm:-top-8 sm:-right-14 w-44 sm:w-52 pointer-events-none z-20 select-none will-change-transform"
+              >
                 {/* Glowing node aura */}
-                <div className="absolute top-2 right-2 w-20 h-20 bg-cyan-400/25 rounded-full blur-xl pointer-events-none" />
+                <div 
+                  ref={circuitGlowRef}
+                  className="absolute top-2 right-2 w-20 h-20 bg-cyan-400/25 rounded-full blur-xl pointer-events-none will-change-transform" 
+                />
                 <img 
                   src="/circuit-tech.png" 
                   alt="Cyber Tech Circuit Accent" 
@@ -99,8 +167,11 @@ export default function Hero() {
                 />
               </div>
 
-              {/* Main Card Container with increased shadow */}
-              <div className="relative z-10 rounded-3xl border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900/95 p-3 sm:p-3.5 shadow-[0_22px_55px_rgba(0,0,0,0.16),0_12px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_30px_75px_-15px_rgba(0,0,0,0.85),0_0_35px_rgba(0,0,0,0.5)] backdrop-blur-md overflow-hidden">
+              {/* Main Card Container with GSAP Floating Animation */}
+              <div 
+                ref={cardRef}
+                className="relative z-10 rounded-3xl border border-neutral-200/90 dark:border-neutral-800/90 bg-white dark:bg-neutral-900/95 p-3 sm:p-3.5 shadow-[0_22px_55px_rgba(0,0,0,0.16),0_12px_24px_rgba(0,0,0,0.08)] backdrop-blur-md overflow-hidden will-change-transform"
+              >
                 
                 {/* Picture Frame */}
                 <div className="relative aspect-[4/5] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-800">

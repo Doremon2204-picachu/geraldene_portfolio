@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 export default function About() {
@@ -91,11 +90,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="mb-12 sm:mb-16 space-y-3 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200/50 dark:border-indigo-800/50">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Get To Know Me</span>
-          </div>
+        <div className="mb-12 sm:mb-16 max-w-2xl">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
             About Me
           </h2>
